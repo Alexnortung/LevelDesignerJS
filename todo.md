@@ -6,6 +6,7 @@
     * id
     * color
     * other attributes
+  * Selected block
   * enable/disable wires and grid
   * zooming
 * moving around when zoomed
