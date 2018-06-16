@@ -8,6 +8,7 @@
   * add blocks
   * alter blocks
     * id
+    * block names
     * color
       * color picker
     * other attributes
@@ -18,4 +19,5 @@
 * moving around when zoomed
 * "brushes"
 * undo
+  * actions array
 * line-, rect- circle-tools
