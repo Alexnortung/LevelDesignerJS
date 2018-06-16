@@ -39,8 +39,29 @@ Designer.prototype.createMap = function() {
 };
 
 Designer.prototype.move = function (dx, dy) {
+
+	var newPosVector = this.position.add(dx, dy);
+
+	//restrict movement at the end of the level
+	var maxX = (this.mapSize.x * this.drawScale) -width;
+	var maxY = (this.mapSize.y * this.drawScale) -height;
+	var maxPosVetor = new Vector(maxX, maxY);
+	if (newPosVector.x > maxPosVetor.x ) {
+		newPosVector.x = maxPosVetor.x;
+	}
+	if (newPosVector.y > maxPosVetor.y) {
+		newPosVector.y = maxPosVetor.y;
+	}
+
 	//restrict movement to not go behind (0,0)
-	
+	if (newPosVector.x < 0 ) {
+		newPosVector.x = 0;
+	}
+	if (newPosVector.y < 0) {
+		newPosVector.y = 0;
+	}
+
+	this.position = newPosVector;	
 
 
 };
