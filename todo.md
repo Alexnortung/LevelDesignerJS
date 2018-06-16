@@ -14,3 +14,4 @@
 
   * zooming
 * moving around when zoomed
+* "brushes"
