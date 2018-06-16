@@ -5,9 +5,11 @@
   * Map size
     * insert current map in the new map
     * anchor points if existing map
-  * blocks
+  * add blocks
+  * alter blocks
     * id
     * color
+      * color picker
     * other attributes
   * Selected block
   * enable/disable wires and grid
@@ -15,3 +17,5 @@
   * zooming
 * moving around when zoomed
 * "brushes"
+* undo
+* line-, rect- circle-tools
