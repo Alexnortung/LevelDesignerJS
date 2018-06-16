@@ -2,6 +2,8 @@
 * Export function
 * Panel to change variables
   * Map size
+    * insert current map in the new map
+    * anchor points if existing map
   * blocks
     * id
     * color
