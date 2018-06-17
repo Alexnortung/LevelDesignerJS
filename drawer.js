@@ -23,7 +23,12 @@ function draw() {
 			fill(
 				color(designer.blocks[b].color)
 			);
-			noStroke();
+			if (!designer.showGrid) {
+				noStroke();
+			} else {
+				stroke(100);
+			}
+
 			rect(bVector.x, bVector.y, sideLength, sideLength);
 
 			pop();
