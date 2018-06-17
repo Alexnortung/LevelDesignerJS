@@ -25,8 +25,24 @@ Designer.prototype.placeBlock = function(x, y) {
 	if (x >= 0 && x < this.mapSize.x && y >= 0 && y < this.mapSize.y ) {
 		this.map[x][y] = cloneVar(this.selectedBlock);
 	}
+};
+
+
+Designer.prototype.placeRect = function (x, y, x2, y2) {
+	var minX = Math.min(x,x2);
+	var maxX = Math.max(x,x2);
+	var minY = Math.min(y,y2);
+	var maxY = Math.max(y,y2);
+	for (var i = minX; i <= maxX; i++) {
+		for (var j = minY; j <= maxY; j++) {
+			this.placeBlock(i,j);
+		}
+
+	}
+
 
 };
+
 
 Designer.prototype.createMap = function() {
 	this.map = []
