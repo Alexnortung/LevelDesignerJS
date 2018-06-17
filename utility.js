@@ -41,3 +41,8 @@ function posYChecker (pos, y) {
 	}
 	return pos;
 }
+
+function toggleBool(bool) {
+	bool = !bool;
+
+}

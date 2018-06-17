@@ -209,6 +209,5 @@ Designer.prototype.isPositionInside = function (pos,y) {
 
 
 Designer.prototype.selectTool = function (toolf) {
-	var tool = new toolf();
-	this.selectTool = tool;
+	this.selectedTool = new toolf();
 };

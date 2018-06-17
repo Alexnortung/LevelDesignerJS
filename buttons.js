@@ -78,12 +78,12 @@ function ExportFile(){
 //Interface tools
 
 function Toggle_Wire(){
-
+	designer.showWires = !designer.showWires;
 
 }
 
 function Toggle_Grid(){
-
+	designer.showGrid = !designer.showGrid;
 
 }
 
@@ -103,8 +103,8 @@ function zoomOut(){
 
 
 //Drawing tools
-function LineTool(){
-
+function LineToolButton(){
+	designer.selectTool(LineTool);
 
 }
 
@@ -114,7 +114,7 @@ function CircleTool(){
 }
 
 function BoxTool(){
-
+	designer.selectTool(RectTool);
 
 }
 
