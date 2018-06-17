@@ -16,7 +16,7 @@
   * enable/disable wires and grid
 
   * zooming
-* moving around when zoomed
+* ~~moving around when zoomed~~
 * "brushes"
 * undo
   * actions array
