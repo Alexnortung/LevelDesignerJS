@@ -14,6 +14,7 @@ function Designer() {
 	]
 
 	this.activeTool = this.tools[0];
+	this.toolActivated = false;
 
 	//means every block is drawn with drawScale x drawScale pixels
 	this.drawScale = 48;
