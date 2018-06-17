@@ -6,6 +6,10 @@ var canvas;
 function setup() {
 	canvas = createCanvas(800,800);
 	$(canvas.canvas.id).appendTo("#canvasContainer");
+	canvas.canvas.oncontextmenu = function() {
+    return false;
+	}
+
 	designer = new Designer();
 }
 
@@ -65,7 +69,7 @@ function draw() {
 
 			push();
 			//horizontal-lines
-			stroke(50,50,255);
+			stroke(designer.mouseStrokeColor);
 			line(mouseBlockVector.x, 0, mouseBlockVector.x, designer.mapSize.x * designer.drawScale);
 			line(mouseBlockVector.x + sideLength, 0, mouseBlockVector.x + sideLength, designer.mapSize.x * designer.drawScale);
 
@@ -80,7 +84,7 @@ function draw() {
 
 
 		push();
-		stroke(50,50,255);
+		stroke(designer.mouseStrokeColor);
 		var b = designer.map[mouseBlockX][mouseBlockY];
 		fill(
 			color(designer.blocks[b].color)
@@ -90,9 +94,22 @@ function draw() {
 		pop();
 	}
 
+
+	designer.selectedTool.draw();
+
 }
 
 function mousePressed() {
+
+	if (mouseButton === RIGHT) {
+      designer.selectedTool.deactivate();
+  } else if (mouseButton === LEFT) {
+  	designer.selectedTool.mousePress();
+  }
+
+
+
+	/*
 	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
 	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
 
@@ -104,5 +121,5 @@ function mousePressed() {
 		designer.placeBlock(mouseBlockX, mouseBlockY);
 		//console.log("block placed at ", mouseBlockX, mouseBlockY);
 
-	}
+	}*/
 }

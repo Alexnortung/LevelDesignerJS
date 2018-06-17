@@ -7,6 +7,11 @@ function Designer() {
 
 	this.selectedBlock = 1;
 
+	this.selectedTool = new RectTool();
+
+	this.mouseStrokeColor = color(50,50,255);
+
+
 	//means every block is drawn with drawScale x drawScale pixels
 	this.drawScale = 48;
 	this.showWires = false;
@@ -22,11 +27,38 @@ function Designer() {
 }
 
 Designer.prototype.placeBlock = function(x, y) {
-	if (x >= 0 && x < this.mapSize.x && y >= 0 && y < this.mapSize.y ) {
+	if (this.isPositionInside(x,y) ) {
+		//console.log(x,y);
 		this.map[x][y] = cloneVar(this.selectedBlock);
+	}
+};
+
+
+Designer.prototype.placeLine = function (x1,y1,x2,y2) {
+	var plots = getLineArray(x1,y1,x2,y2);
+	//console.log(plots);
+	for (var i = 0; i < plots.length; i++) {
+		this.placeBlock(plots[i].x, plots[i].y);
 	}
 
 };
+
+
+Designer.prototype.placeRect = function (x, y, x2, y2) {
+	var minX = Math.min(x,x2);
+	var maxX = Math.max(x,x2);
+	var minY = Math.min(y,y2);
+	var maxY = Math.max(y,y2);
+	for (var i = minX; i <= maxX; i++) {
+		for (var j = minY; j <= maxY; j++) {
+			this.placeBlock(i,j);
+		}
+
+	}
+
+
+};
+
 
 Designer.prototype.createMap = function() {
 	this.map = []
@@ -106,12 +138,24 @@ Designer.prototype.moveTo = function (pos, y) {
 
 
 Designer.prototype.getNewPos = function (pos, y) {
+	// gets a new position relative to the posistion of the users view
+		pos = this.posYChecker(pos,y);
+
+	return pos.subtract(this.position);
+};
+
+Designer.prototype.posYChecker = function (pos, y) {
 	if (typeof y !== undefinedS && typeof pos !== "object") {
 		pos = new Vector(pos, y);
 	}
+	return pos;
+};
 
-	return pos.subtract(this.position);
 
+Designer.prototype.getMouseBlockVector = function () {
+	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
+	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
+	return new Vector(mouseBlockX, mouseBlockY);
 };
 
 
@@ -148,16 +192,23 @@ Designer.prototype.zoom = function (dz) {
 
 	this.drawScale = newDrawScale;
 
-
-
-
-
 	this.moveTo(p2);
 
 	//console.log(p1,p2);
 
+};
+
+Designer.prototype.isPositionInside = function (pos,y) {
+	var pos = this.posYChecker(pos, y);
+	if (pos.x >= 0 && pos.x < this.mapSize.x && pos.y >= 0 && pos.y < this.mapSize.y ) {
+		return true;
+	} else {
+		return false;
+	}
+};
 
 
-
-
+Designer.prototype.selectTool = function (toolf) {
+	var tool = new toolf();
+	this.selectTool = tool;
 };
