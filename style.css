@@ -1,0 +1,25 @@
+.list{
+  list-style-type:none;
+  display:block;
+}
+
+.list button{
+  border:none;
+  outline:none;
+
+}
+
+.list li{
+  float:left;
+
+}
+
+.active{
+  background-color: #757575;
+
+}
+
+.hover{
+  background-color:#B6B6B6;
+
+}

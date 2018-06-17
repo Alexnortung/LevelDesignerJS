@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="lib/vector.js"></script>
 	<script type="text/javascript" src="designer.js"></script>
 	<script type="text/javascript" src="drawer.js"></script>
+	<script type="text/javascript" src="buttons.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -17,8 +18,16 @@
 
 	<header>
 		<div id="panel">
-			<p>panel</p>
-
+			<ul id="ulPanel" class="list">
+				<button onclick="MoveTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="0" class=""><li><img src="images/Hand_tool_v1.png"></li></button>
+				<button onclick="RotateTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="1" class=""><li><img src="images/Rotate_tool_v2.png"></li></button>
+				<button onclick="ZoomTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="2" class=""><li><img src="images/Zoom_tool_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="AddBlock()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="3" class="active"><li><img src="images/Add_block_v1.png"></li></button>
+				<button onclick="ChangeBlock()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="4" class=""><li><img src="images/Change_block_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="ExportFile()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="5" class=""><li><img src="images/Export_file_v1.png"></li></button>
+			</ul>
 		</div>
 	</header>
 
