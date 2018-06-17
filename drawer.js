@@ -23,7 +23,12 @@ function draw() {
 			fill(
 				color(designer.blocks[b].color)
 			);
-			noStroke();
+			if (!designer.showGrid) {
+				noStroke();
+			} else {
+				stroke(100);
+			}
+
 			rect(bVector.x, bVector.y, sideLength, sideLength);
 
 			pop();
@@ -55,19 +60,18 @@ function draw() {
 
 
 
-		if (designer.drawWires) {
+		if (designer.showWires) {
+			//console.log("showing wires");
 
 			push();
 			//horizontal-lines
 			stroke(50,50,255);
 			line(mouseBlockVector.x, 0, mouseBlockVector.x, designer.mapSize.x * designer.drawScale);
-
 			line(mouseBlockVector.x + sideLength, 0, mouseBlockVector.x + sideLength, designer.mapSize.x * designer.drawScale);
 
 
 			//vertical-lines
 			line(0, mouseBlockVector.y, designer.mapSize.y * designer.drawScale, mouseBlockVector.y);
-
 			line(0, mouseBlockVector.y + sideLength, designer.mapSize.y * designer.drawScale, mouseBlockVector.y + sideLength);
 
 			pop();

@@ -46,7 +46,7 @@ Designer.prototype.getMaxPosVector = function () {
 };
 
 Designer.prototype.move = function (dx, dy) {
-	console.log("moving", dx, dy);
+	//console.log("moving", dx, dy);
 
 	var newPosVector = this.position.add(new Vector(dx, dy));
 
@@ -117,6 +117,46 @@ Designer.prototype.getNewPos = function (pos, y) {
 
 Designer.prototype.zoom = function (dz) {
 	//find middle
+	var middleX = (width/2) + this.position.x;
+	var middleY = (height/2) + this.position.y;
+	var middle = new Vector(middleX + middleY);
+	middle.divideBy(this.drawScale);
+
+	var newDrawScale = this.drawScale + dz;
+	if (newDrawScale < 1) {
+		newDrawScale = 1;
+	}
+
+	var nb1x = width / this.drawScale;
+	var nb2x = width / newDrawScale;
+	var nb3x = (nb1x-nb2x)/2;
+	var p2x = nb3x * newDrawScale;
+
+	var nb1y = height / this.drawScale;
+	var nb2y = height / newDrawScale;
+	var nb3y = (nb1y-nb2y)/2;
+	var p2y = nb3y * newDrawScale;
+
+	var p1 = this.position.copy();
+
+	var nbp1 = this.position.divide(this.drawScale);
+	var newp1 = nbp1.multiply(newDrawScale);
+
+
+	var p2 = newp1.add(new Vector(p2x, p2y));
+	//console.log("p2:", p2, "p1:", p1);
+
+	this.drawScale = newDrawScale;
+
+
+
+
+
+	this.moveTo(p2);
+
+	//console.log(p1,p2);
+
+
 
 
 
