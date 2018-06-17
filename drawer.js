@@ -65,7 +65,7 @@ function draw() {
 
 			push();
 			//horizontal-lines
-			stroke(50,50,255);
+			stroke(designer.mouseStrokeColor);
 			line(mouseBlockVector.x, 0, mouseBlockVector.x, designer.mapSize.x * designer.drawScale);
 			line(mouseBlockVector.x + sideLength, 0, mouseBlockVector.x + sideLength, designer.mapSize.x * designer.drawScale);
 
@@ -80,7 +80,7 @@ function draw() {
 
 
 		push();
-		stroke(50,50,255);
+		stroke(designer.mouseStrokeColor);
 		var b = designer.map[mouseBlockX][mouseBlockY];
 		fill(
 			color(designer.blocks[b].color)
@@ -90,9 +90,16 @@ function draw() {
 		pop();
 	}
 
+
+	designer.selectedTool.draw();
+
 }
 
 function mousePressed() {
+
+	designer.selectedTool.mousePress();
+
+	/*
 	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
 	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
 
@@ -104,5 +111,5 @@ function mousePressed() {
 		designer.placeBlock(mouseBlockX, mouseBlockY);
 		//console.log("block placed at ", mouseBlockX, mouseBlockY);
 
-	}
+	}*/
 }
