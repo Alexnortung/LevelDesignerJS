@@ -7,7 +7,7 @@ function Designer() {
 
 	this.selectedBlock = 1;
 
-	this.selectedTool = new LineTool();
+	this.selectedTool = new RectTool();
 
 	this.mouseStrokeColor = color(50,50,255);
 
