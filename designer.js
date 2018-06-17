@@ -7,6 +7,14 @@ function Designer() {
 
 	this.selectedBlock = 1;
 
+	this.tools = [
+		"freehand",
+		"rectangle",
+		"line"
+	]
+
+	this.activeTool = this.tools[0];
+
 	//means every block is drawn with drawScale x drawScale pixels
 	this.drawScale = 48;
 	this.showWires = false;
@@ -25,6 +33,36 @@ Designer.prototype.placeBlock = function(x, y) {
 	if (x >= 0 && x < this.mapSize.x && y >= 0 && y < this.mapSize.y ) {
 		this.map[x][y] = cloneVar(this.selectedBlock);
 	}
+};
+
+
+Designer.prototype.placeLine = function (x1,y1,x2,y2) {
+	var dx = x2-x1;
+	var dy = y2-y1;
+	var x = x1;
+	var y = y1;
+	var step;
+
+	var Madx = Math.abs(dx);
+	var Mady = Math.abs(dy);
+
+	if (Madx >= Mady ) {
+		step = Madx;
+	} else {
+		step = Mady
+	}
+
+	dx = dx / step;
+  dy = dy / step;
+
+	i = 0;
+	while(i  <= step) {
+		this.placeBlock(x, y);
+		x += dx;
+		y += dy;
+		i++;
+	}
+
 };
 
 
