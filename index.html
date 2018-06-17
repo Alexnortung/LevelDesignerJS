@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="lib/vector.js"></script>
 	<script type="text/javascript" src="designer.js"></script>
 	<script type="text/javascript" src="drawer.js"></script>
+	<script type="text/javascript" src="buttons.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -17,8 +18,33 @@
 
 	<header>
 		<div id="panel">
+			<ul id="ulPanel" class="list">
+				<button onclick="MoveTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="0" class=""><li><img title="Move Tool" src="images/Hand_tool_v1.png"></li></button>
+				<button onclick="RotateTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="1" class=""><li><img title="Rotate Tool" src="images/Rotate_tool_v2.png"></li></button>
+				<button onclick="ZoomTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="2" class=""><li><img title="Zoom Tool" src="images/Zoom_tool_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="AddBlock()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="3" class="active"><li><img title="Add block" src="images/Add_block_v1.png"></li></button>
+				<button onclick="ChangeBlock()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="4" class=""><li><img title="Change block" src="images/Change_block_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="ExportFile()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="5" class=""><li><img title="Export file" src="images/Export_file_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="ShowWires()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="6" class="toggleactive"><li><img title="Toggle wirelines" src="images/Show_Wires_v1.png"></li></button>
+				<button onclick="ShowGrid()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="7" class=""><li><img title="Toggle gridlines" src="images/Show_Grid_v1.png"></li></button>
+			</ul>
 
+			<ul id="ulPanel" class="list">
+				<button onclick="zoomIn()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="ZoomInBut" class="hidden zoom"><li><img title="Move Tool" src="images/Plus_v1.png"></li></button>
+				<button onclick="zoomOut()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="ZoomOutBut" class="hidden zoom"><li><img title="Move Tool" src="images/Minus_v1.png"></li></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button onclick="LineTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="0" class="drawactive"><li><img title="Move Tool" src="images/line_tool_v1.png"></li></button>
+				&nbsp;&nbsp;
+				<button onclick="CircleTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="1" class=""><li><img title="Rotate Tool" src="images/circle_tool_v1.png"></li></button>
+				&nbsp;&nbsp;
+				<button onclick="BoxTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="2" class=""><li><img title="Zoom Tool" src="images/box_tool_v1.png"></li></button>
+				&nbsp;&nbsp;
+				<button onclick="FreeLineTool()" onmouseover="hover(this)" onmouseleave="Nohover(this)" id="3" class=""><li><img title="Add block" src="images/FreeLine_tool_v1.png"></li></button>
 
+			</ul>
 		</div>
 	</header>
 
