@@ -1,3 +1,5 @@
+var zoomBut;
+
 //Activation function
 function Activation(n) {
 	//remove activation for other
@@ -40,17 +42,15 @@ function RotateTool(){
 function ZoomTool(){
 	Active = Activation(2);
 	var elems = document.getElementsByClassName('zoom');
+
 	if(Active){
 			for (var i = 0; i < elems.length; i++){
-				elems[i].classList.remove("active");
+				elems[i].classList.remove("hidden");
 			}
+			zoomBut = true;
 	}
 
-
 }
-
-
-
 
 
 //Building tools
