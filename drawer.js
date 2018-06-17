@@ -18,6 +18,7 @@ function draw() {
 			var b = designer.map[x][y];
 			var bVector = new Vector(x,y);
 			bVector.multiplyBy(sideLength);
+			bVector = designer.getNewPos(bVector);
 			push();
 			fill(
 				color(designer.blocks[b].color)
@@ -27,24 +28,26 @@ function draw() {
 
 			pop();
 		}
-		
+
 	}
 	/*
 	if (designer.drawGrid) {
 		for (var x = designer.mapSize.x - 2; x > 0; x--) {
-			
+
 		}
 	}
 	*/
 
 	//stroke the block the mouse is hovering over
 
-	var mouseBlockX = Math.floor(mouseX / sideLength);
-	var mouseBlockY = Math.floor(mouseY / sideLength);
-	if (mouseBlockX >= 0 && mouseBlockX < designer.mapSize.x && 
+	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
+	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
+	if (mouseBlockX >= 0 && mouseBlockX < designer.mapSize.x &&
 		mouseBlockY >= 0 && mouseBlockY < designer.mapSize.y ) {
 		var mouseBlockVector = new Vector(mouseBlockX, mouseBlockY);
 		mouseBlockVector.multiplyBy(sideLength);
+
+		mouseBlockVector = designer.getNewPos(mouseBlockVector);
 
 		//console.log(mouseBlockVector.x);
 
@@ -58,15 +61,15 @@ function draw() {
 			//horizontal-lines
 			stroke(50,50,255);
 			line(mouseBlockVector.x, 0, mouseBlockVector.x, designer.mapSize.x * designer.drawScale);
-			
+
 			line(mouseBlockVector.x + sideLength, 0, mouseBlockVector.x + sideLength, designer.mapSize.x * designer.drawScale);
-			
+
 
 			//vertical-lines
 			line(0, mouseBlockVector.y, designer.mapSize.y * designer.drawScale, mouseBlockVector.y);
-			
+
 			line(0, mouseBlockVector.y + sideLength, designer.mapSize.y * designer.drawScale, mouseBlockVector.y + sideLength);
-			
+
 			pop();
 		}
 
@@ -82,16 +85,16 @@ function draw() {
 
 		pop();
 	}
-	
+
 }
 
 function mousePressed() {
-	var mouseBlockX = Math.floor(mouseX / sideLength);
-	var mouseBlockY = Math.floor(mouseY / sideLength);
+	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
+	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
 
 	//console.log("mouse pressed at ", mouseBlockX, mouseBlockY);
 
-	if (mouseBlockX >= 0 && mouseBlockX < designer.mapSize.x && 
+	if (mouseBlockX >= 0 && mouseBlockX < designer.mapSize.x &&
 		mouseBlockY >= 0 && mouseBlockY < designer.mapSize.y ) {
 
 		designer.placeBlock(mouseBlockX, mouseBlockY);
