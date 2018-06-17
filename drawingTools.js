@@ -24,6 +24,33 @@ Tool.prototype.drawStartRect = function () {
 }
 
 Tool.prototype.mousePress = function () {
+  var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY);
+  if (designer.isPositionInside(mouseBlockVector)) {
+    if (this.activated) {
+      //draw the selected shape
+      this.placeBlocks();
+      this.deactivate();
+
+    } else {
+        this.activate();
+    }
+  }
+};
+
+Tool.prototype.create = function () {
+
+};
+
+Tool.prototype.outlineBlock = function (pos, y) {
+  pos = posYChecker(pos, y);
+
+  push();
+  stroke(designer.mouseStrokeColor);
+  var fillColor = color(designer.blocks[designer.selectedBlock].color)
+  fillColor.setAlpha(100);
+  fill(fillColor);
+  rect(pos.x, pos.y, designer.drawScale, designer.drawScale);
+  pop();
 
 };
 
@@ -46,6 +73,7 @@ function LineTool() {
 
 }
 
+// inheriting methods from Tool
 LineTool.prototype = Object.create(Tool.prototype);
 
 LineTool.prototype.draw = function () {
@@ -57,14 +85,18 @@ LineTool.prototype.draw = function () {
       var plots = getLineArray(this.activatedPos.x, this.activatedPos.y, mouseBlockVector.x, mouseBlockVector.y);
 
       for (var i = 0; i < plots.length; i++) {
-        push()
         plots[i].multiplyBy(designer.drawScale);
+        this.outlineBlock(plots[i]);
+
+
+        /*push()
+
         stroke(designer.mouseStrokeColor);
         var fillColor = color(designer.blocks[designer.selectedBlock].color)
         fillColor.setAlpha(100);
         fill(fillColor);
         rect(plots[i].x, plots[i].y, designer.drawScale, designer.drawScale);
-        pop()
+        pop();*/
 
       }
 
@@ -78,21 +110,54 @@ LineTool.prototype.draw = function () {
   }
 };
 
-LineTool.prototype.mousePress = function () {
-  var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY)
-  if (designer.isPositionInside(mouseBlockVector)) {
-    if (this.activated) {
-      //place line
-      designer.placeLine(this.activatedPos.x, this.activatedPos.y, mouseBlockVector.x, mouseBlockVector.y);
-      this.deactivate();
 
-    } else {
-        this.activate();
-    }
-  }
+LineTool.prototype.placeBlocks = function () {
+  var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY);
+  designer.placeLine(this.activatedPos.x, this.activatedPos.y, mouseBlockVector.x, mouseBlockVector.y);
 };
 
 
 /*******
 RECT TOOL
 ******/
+
+function RectTool() {
+  Tool.call(this);
+
+}
+
+// inheriting methods from Tool
+RectTool.prototype = Object.create(Tool.prototype);
+
+RectTool.prototype.draw = function () {
+  if (this.activated) {
+    var mouseBlockVector = designer.getMouseBlockVector();
+    if (designer.isPositionInside(mouseBlockVector)) {
+      var plots = [];
+      var minX = Math.min(mouseBlockVector.x, this.activatedPos.x);
+      var maxX = Math.max(mouseBlockVector.x, this.activatedPos.x);
+      var minY = Math.min(mouseBlockVector.y, this.activatedPos.y);
+      var maxY = Math.max(mouseBlockVector.y, this.activatedPos.y);
+
+      for (var i = minX; i <= maxX; i++) {
+        for (var j = minY; j <= maxY; j++) {
+          var blockVector = new Vector(i, j);
+          blockVector.multiplyBy(designer.drawScale);
+          this.outlineBlock(blockVector.x, blockVector.y);
+        }
+      }
+
+
+
+    }
+
+    this.drawStartRect();
+
+
+  }
+};
+
+RectTool.prototype.placeBlocks = function () {
+  var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY);
+  designer.placeRect(this.activatedPos.x, this.activatedPos.y, mouseBlockVector.x, mouseBlockVector.y);
+};
