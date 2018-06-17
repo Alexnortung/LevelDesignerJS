@@ -1,8 +1,7 @@
 //Activation function
 function Activation(n) {
 	//remove activation for other
-
-
+	var Active = true;
 
 	var elems = document.getElementsByClassName("active");
 	for (var i = elems.length -1 ; i >= 0; i--){
@@ -13,7 +12,7 @@ function Activation(n) {
 	var elemM = document.getElementById(m);
 	elemM.classList.add('active');
 	elemM.classList.remove('hover');
-
+	return(Active);
 }
 
 //Hover function
@@ -39,7 +38,14 @@ function RotateTool(){
 }
 
 function ZoomTool(){
-	Activation(2);
+	Active = Activation(2);
+	var elems = document.getElementsByClassName('zoom');
+	if(Active){
+			for (var i = 0; i < elems.length; i++){
+				elems[i].classList.remove("active");
+			}
+	}
+
 
 }
 
@@ -47,7 +53,7 @@ function ZoomTool(){
 
 
 
-//Block tools
+//Building tools
 function AddBlock(){
 	Activation(3);
 
@@ -64,5 +70,55 @@ function ChangeBlock(){
 //Export tool
 function ExportFile(){
 	Activation(5);
+
+}
+
+
+
+//Interface tools
+
+function Toggle_Wire(){
+
+
+}
+
+function Toggle_Grid(){
+
+
+}
+
+
+
+//Zoom tools
+function zoomIn(){
+
+
+}
+
+function zoomOut(){
+
+
+}
+
+
+
+//Drawing tools
+function LineTool(){
+
+
+}
+
+function CircleTool(){
+
+
+}
+
+function BoxTool(){
+
+
+}
+
+function FreeLineTool(){
+
 
 }
