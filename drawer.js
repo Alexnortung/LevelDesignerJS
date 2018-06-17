@@ -6,6 +6,10 @@ var canvas;
 function setup() {
 	canvas = createCanvas(800,800);
 	$(canvas.canvas.id).appendTo("#canvasContainer");
+	canvas.canvas.oncontextmenu = function() {
+    return false;
+	}
+
 	designer = new Designer();
 }
 
@@ -97,7 +101,13 @@ function draw() {
 
 function mousePressed() {
 
-	designer.selectedTool.mousePress();
+	if (mouseButton === RIGHT) {
+      designer.selectedTool.deactivate();
+  } else if (mouseButton === LEFT) {
+  	designer.selectedTool.mousePress();
+  }
+
+
 
 	/*
 	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
