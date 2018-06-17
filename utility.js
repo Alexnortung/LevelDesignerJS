@@ -34,3 +34,10 @@ function getLineArray(x1,y1,x2,y2) {
 	}
 	return plots;
 }
+
+function posYChecker (pos, y) {
+	if (typeof y !== undefinedS && typeof pos !== "object") {
+		pos = new Vector(pos, y);
+	}
+	return pos;
+}
