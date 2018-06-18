@@ -37,6 +37,15 @@ Tool.prototype.mousePress = function () {
   }
 };
 
+Tool.prototype.mouseDrag = function () {
+
+};
+
+Tool.prototype.mouseRelease = function () {
+
+};
+
+
 Tool.prototype.create = function () {
 
 };
@@ -160,4 +169,49 @@ RectTool.prototype.draw = function () {
 RectTool.prototype.placeBlocks = function () {
   var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY);
   designer.placeRect(this.activatedPos.x, this.activatedPos.y, mouseBlockVector.x, mouseBlockVector.y);
+};
+
+
+/*******
+FREEHAND TOOL
+******/
+
+function FreeHandTool() {
+  Tool.call(this);
+
+}
+
+FreeHandTool.prototype = Object.create(Tool.prototype);
+
+FreeHandTool.prototype.mousePress = function () {
+  if (!this.activated) {
+    this.activate();
+    this.pMouseBlockVector = this.activatedPos;
+    this.placeBlocks();
+  }
+};
+
+FreeHandTool.prototype.mouseDrag = function () {
+  if (this.activated) {
+    this.placeBlocks();
+  }
+
+};
+
+FreeHandTool.prototype.mouseRelease = function () {
+  this.deactivate();
+};
+
+FreeHandTool.prototype.placeBlocks = function () {
+
+  var mouseBlockVector = designer.getMouseBlockVector(mouseX, mouseY);
+
+  var plots = getLineArray(this.pMouseBlockVector.x, this.pMouseBlockVector.y, mouseBlockVector.x, mouseBlockVector.y);
+  //console.log(plots, mouseBlockVector, pMouseBlockVector);
+  for (var i = 0; i < plots.length; i++) {
+    designer.placeBlock(plots[i]);
+  }
+
+  this.pMouseBlockVector = mouseBlockVector;
+
 };

@@ -27,12 +27,12 @@ function Nohover(n){
 
 
 //Movement tools
-function MoveTool(){
+function moveTool(){
 	Activation(0);
 
 }
 
-function RotateTool(){
+function rotateTool(){
 	Activation(1);
 
 }
@@ -103,22 +103,22 @@ function zoomOut(){
 
 
 //Drawing tools
-function LineToolButton(){
+function lineToolButton(){
 	designer.selectTool(LineTool);
 
 }
 
-function CircleTool(){
+function circleTool(){
 
 
 }
 
-function BoxTool(){
+function boxTool(){
 	designer.selectTool(RectTool);
 
 }
 
-function FreeLineTool(){
+function freeLineTool(){
 
 
 }

@@ -97,6 +97,12 @@ function draw() {
 
 	designer.selectedTool.draw();
 
+	/* // line that follows mouse
+	push();
+	stroke(255,50,50)
+	line(mouseX,mouseY,pmouseX,pmouseY);
+	pop();*/
+
 }
 
 function mousePressed() {
@@ -106,8 +112,6 @@ function mousePressed() {
   } else if (mouseButton === LEFT) {
   	designer.selectedTool.mousePress();
   }
-
-
 
 	/*
 	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
@@ -122,4 +126,14 @@ function mousePressed() {
 		//console.log("block placed at ", mouseBlockX, mouseBlockY);
 
 	}*/
+}
+
+function mouseDragged() {
+
+	designer.selectedTool.mouseDrag();
+}
+
+function mouseReleased() {
+
+	designer.selectedTool.mouseRelease();
 }

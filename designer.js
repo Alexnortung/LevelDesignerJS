@@ -26,10 +26,11 @@ function Designer() {
 
 }
 
-Designer.prototype.placeBlock = function(x, y) {
-	if (this.isPositionInside(x,y) ) {
+Designer.prototype.placeBlock = function(pos, y) {
+	pos = this.posYChecker(pos,y)
+	if (this.isPositionInside(pos.x, pos.y) ) {
 		//console.log(x,y);
-		this.map[x][y] = cloneVar(this.selectedBlock);
+		this.map[pos.x][pos.y] = cloneVar(this.selectedBlock);
 	}
 };
 
