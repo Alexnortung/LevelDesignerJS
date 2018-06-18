@@ -13,7 +13,7 @@ function Designer() {
 
 
 	//means every block is drawn with drawScale x drawScale pixels
-	this.drawScale = 48;
+	this.drawScale = 24;
 	this.showWires = false;
 	this.showGrid = true;
 	this.gridColor = "#888888";
