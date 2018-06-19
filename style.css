@@ -33,3 +33,39 @@
 .hidden{
   display: none;
 }
+
+#sidebar{
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 250px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: #fefefe;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+
+  border-style: solid;
+  border-color: #aaa;
+  border-width: 0 0 0 1px;
+
+}
+
+#sidebar a{
+  padding: 6px 8px 6px 8px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #000;
+  display: block;
+  text-align: center;
+  margin-left: 12.5%;
+  margin-bottom: 12px;
+
+  width: 70%;
+
+  border-style: solid;
+  border-color: #aaa;
+  border-width: 1px;
+  border-radius: 5px
+
+}
