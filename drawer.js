@@ -1,44 +1,91 @@
 var designer;
 var sideLength;
 var canvas;
+var pgBackground;
+var pg;
+var pgGrid;
+var canvasSize = new Vector(800,800);
 
 
 function setup() {
-	canvas = createCanvas(800,800);
+	//creating canvas
+	canvas = createCanvas(canvasSize.x, canvasSize.y);
+
+	//creating graphics
+	pg = createGraphics(canvasSize.x, canvasSize.y);
+	pgBackground = createGraphics(canvasSize.x, canvasSize.y);
+	pgGrid = createGraphics(canvasSize.x, canvasSize.y);
+
+	//putting the canvas into the canvasContainer
 	$(canvas.canvas.id).appendTo("#canvasContainer");
+
+	//canvas right clicks will not open contect menu
 	canvas.canvas.oncontextmenu = function() {
     return false;
 	}
 
+	//instantiating designer class
 	designer = new Designer();
+
+	//renderBackground after instantiating designer.
+	renderBackground();
+
+	renderGrid();
+
 }
 
-
-function draw() {
-	background("#fff")
-	sideLength = designer.drawScale;
+function renderBackground() {
+	pgBackground.background("#fff");
 	for (var x = designer.map.length - 1; x >= 0; x--) {
 		for (var y = designer.map.length - 1; y >= 0; y--) {
 			var b = designer.map[x][y];
 			var bVector = new Vector(x,y);
-			bVector.multiplyBy(sideLength);
+			bVector.multiplyBy(designer.drawScale);
 			bVector = designer.getNewPos(bVector);
-			push();
-			fill(
+			pgBackground.push();
+			pgBackground.fill(
 				color(designer.blocks[b].color)
 			);
-			if (!designer.showGrid) {
-				noStroke();
-			} else {
-				stroke(100);
-			}
+			// if (!designer.showGrid) {
+			// 	pgBackground.noStroke();
+			// } else {
+			// 	pgBackground.stroke(100);
+			// }
 
-			rect(bVector.x, bVector.y, sideLength, sideLength);
+			pgBackground.rect(bVector.x, bVector.y, designer.drawScale, designer.drawScale);
 
-			pop();
+			pgBackground.pop();
 		}
-
 	}
+}
+
+function renderGrid() {
+	pgGrid.push();
+	pgGrid.stroke(color(designer.gridColor));
+	for (var x = 1; x < designer.mapSize.x; x++) {
+		var cX = designer.mapSize.x * x * designer.drawScale;
+		pgGrid.line(cX , 0,
+			cX, designer.mapSize.y * designer.drawScale);
+	}
+	for (var y = 1; y < designer.mapSize.x; y++) {
+		var cY = designer.mapSize.y * y * designer.drawScale;
+		pgGrid.line(0, cY,
+			designer.mapSize.x * designer.drawScale, cY);
+	}
+	pgGrid.pop();
+}
+
+
+
+function draw() {
+	image(pgBackground,0,0);
+	if (designer.showGrid) {
+		image(pgGrid,0,0);
+	}
+
+
+	sideLength = designer.drawScale;
+
 	/*
 	if (designer.drawGrid) {
 		for (var x = designer.mapSize.x - 2; x > 0; x--) {
@@ -48,7 +95,6 @@ function draw() {
 	*/
 
 	//stroke the block the mouse is hovering over
-
 	var mouseBlockX = Math.floor((mouseX + designer.position.x) / sideLength);
 	var mouseBlockY = Math.floor((mouseY + designer.position.y) / sideLength);
 	if (mouseBlockX >= 0 && mouseBlockX < designer.mapSize.x &&
@@ -83,6 +129,7 @@ function draw() {
 
 
 
+		//stroke the block at the mosue
 		push();
 		stroke(designer.mouseStrokeColor);
 		var b = designer.map[mouseBlockX][mouseBlockY];
@@ -102,6 +149,12 @@ function draw() {
 	stroke(255,50,50)
 	line(mouseX,mouseY,pmouseX,pmouseY);
 	pop();*/
+
+	//draw all createGraphics
+
+
+
+	image(pg,0,0);
 
 }
 

@@ -30,7 +30,14 @@ Designer.prototype.placeBlock = function(pos, y) {
 	pos = this.posYChecker(pos,y)
 	if (this.isPositionInside(pos.x, pos.y) ) {
 		//console.log(x,y);
-		this.map[pos.x][pos.y] = cloneVar(this.selectedBlock);
+		var b = cloneVar(this.selectedBlock)
+		this.map[pos.x][pos.y] = b;
+		pgBackground.push();
+		pgBackground.noStroke();
+		pgBackground.fill(color(this.blocks[b].color));
+		pgBackground.rect(pos.x * this.drawScale ,pos.y * this. drawScale, this.drawScale , this.drawScale);
+
+		pgBackground.pop();
 	}
 };
 

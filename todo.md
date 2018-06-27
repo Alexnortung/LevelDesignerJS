@@ -21,3 +21,6 @@
 * undo
   * actions array
 * line-, rect- circle-tools
+* collapse til blocks
+* vis hvilken block der er valgt
+* automatisk generer sidebaren
