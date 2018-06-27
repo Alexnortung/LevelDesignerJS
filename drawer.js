@@ -63,12 +63,12 @@ function renderGrid() {
 	pgGrid.push();
 	pgGrid.stroke(color(designer.gridColor));
 	for (var x = 1; x < designer.mapSize.x; x++) {
-		var cX = designer.mapSize.x * x * designer.drawScale;
+		var cX =  x * designer.drawScale;
 		pgGrid.line(cX , 0,
 			cX, designer.mapSize.y * designer.drawScale);
 	}
 	for (var y = 1; y < designer.mapSize.x; y++) {
-		var cY = designer.mapSize.y * y * designer.drawScale;
+		var cY =  y * designer.drawScale;
 		pgGrid.line(0, cY,
 			designer.mapSize.x * designer.drawScale, cY);
 	}
